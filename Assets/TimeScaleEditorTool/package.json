@@ -1,0 +1,20 @@
+{
+    "name"       : "com.xjine.time_scale_editor_tool",
+    "displayName": "Time Scale Editor Tool", 
+    "version"    : "1.0.0",               
+    "unity"      : "2021.3",
+    "description": "Add GUI to edit Time Scale next to Play buttons.",
+    "author"     :
+    {
+        "name": "XJINE",
+        "url" : "https://github.com/XJINE"
+    },
+    "keywords":
+    [
+        "editor"
+    ],
+    "dependencies":
+    {
+        "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git"
+    }
+}
