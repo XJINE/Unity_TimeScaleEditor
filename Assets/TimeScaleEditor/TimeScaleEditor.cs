@@ -5,7 +5,7 @@ using UnityToolbarExtender;
 namespace TimeScaleEditor
 {
     [InitializeOnLoad]
-    public class TimeScaleEditorTool
+    public class TimeScaleEditor
     {
         private const float MaxTimeScale = 10f;
         private const float SliderPower  = 3f;
@@ -13,7 +13,7 @@ namespace TimeScaleEditor
         private static float _timeScaleCache;
         private static bool  _disabled;
 
-        static TimeScaleEditorTool()
+        static TimeScaleEditor()
         {
             ToolbarExtender.RightToolbarGUI.Add(OnToolbarGUI);
             _timeScaleCache = Time.timeScale;

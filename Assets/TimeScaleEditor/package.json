@@ -1,0 +1,19 @@
+{
+    "name"       : "com.xjine.time_scale_editor",
+    "displayName": "Time Scale Editor", 
+    "version"    : "2.0.0",
+    "unity"      : "2021.3",
+    "description": "Add GUI on the right side of Play buttons to edit Time Scale.",
+    "author"     :
+    {
+        "name": "XJINE",
+        "url" : "https://github.com/XJINE"
+    },
+    "keywords":
+    [
+        "editor"
+    ],
+    "dependencies":
+    {
+    }
+}
