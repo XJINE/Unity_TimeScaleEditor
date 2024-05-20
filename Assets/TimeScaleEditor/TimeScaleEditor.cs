@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using UnityToolbarExtender;
 
-namespace TimeScaleEditor
+namespace UnityToolbarExtender.TimeScaleEditor
 {
     [InitializeOnLoad]
     public class TimeScaleEditor
@@ -31,7 +30,7 @@ namespace TimeScaleEditor
             EditorGUILayout.LabelField("Time Scale", GUILayout.Width(70));
 
             var powerSliderValue = Mathf.Pow(Time.timeScale / MaxTimeScale, 1 / SliderPower);
-                powerSliderValue = GUILayout.HorizontalSlider(powerSliderValue, 0, 1);
+            powerSliderValue = GUILayout.HorizontalSlider(powerSliderValue, 0, 1);
 
             Time.timeScale = Mathf.Pow(powerSliderValue, SliderPower) * MaxTimeScale;
             Time.timeScale = (float)System.Math.Round(Time.timeScale, 2);
