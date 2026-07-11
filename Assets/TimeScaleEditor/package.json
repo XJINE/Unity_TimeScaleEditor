@@ -3,7 +3,7 @@
     "displayName": "Time Scale Editor", 
     "version"    : "3.0.0",
     "unity"      : "6000.3",
-    "description": "Add GUI on the right side of Play buttons to edit Time Scale.",
+    "description": "Add control to the main toolbar to edit Time Scale.",
     "author"     :
     {
         "name": "XJINE",
