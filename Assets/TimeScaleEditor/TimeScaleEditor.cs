@@ -1,25 +1,32 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEditor.Toolbars;
-using Position = UnityEditor.Toolbars.MainToolbarDockPosition;
 
-namespace TimeScaleEditors
+namespace TimeScaleEditors {
+public static class TimeScaleEditor
 {
-    public static class TimeScaleEditor
+    private const string Path         = nameof(TimeScaleEditor);
+    private const float  MaxTimeScale = 10f;
+
+    [MainToolbarElement(Path, defaultDockPosition = MainToolbarDockPosition.Middle)]
+    public static IEnumerable<MainToolbarElement> CreateTimeScaleSlider()
     {
-        private const string   ElementId    = nameof(TimeScaleEditor);
-        private const Position DockPosition = Position.Middle;
-        private const float    MaxTimeScale = 10f;
+        var content     = new MainToolbarContent("Time Scale :", tooltip : "Same as Project Settings > Time > Time Scale.");
+        var sliderValue = Time.timeScale;
 
-        [MainToolbarElement(ElementId, defaultDockPosition = DockPosition)]
-        public static MainToolbarElement CreateTimeScaleSlider()
+        yield return new MainToolbarSlider(content, sliderValue, 0f, MaxTimeScale, (changedValue) =>
         {
-            var content     = new MainToolbarContent("Time Scale :", tooltip : "Same as Project Settings > Time > Time Scale.");
-            var sliderValue = Time.timeScale;
+            Time.timeScale = changedValue;
 
-            return new MainToolbarSlider(content, sliderValue, 0f, MaxTimeScale, (changedValue) =>
-            {
-                Time.timeScale = changedValue;
-            });
-        }
+            // var settingsWindowType = typeof(EditorWindow).Assembly.GetType("UnityEditor.SettingsWindow");
+            // if (settingsWindowType != null)
+            // {
+            //     foreach (var window in Resources.FindObjectsOfTypeAll(settingsWindowType))
+            //     {
+            //         ((EditorWindow)window).Repaint();
+            //     }
+            // }
+        });
     }
-}
+}}
