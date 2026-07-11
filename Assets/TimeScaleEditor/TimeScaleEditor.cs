@@ -1,48 +1,25 @@
-﻿using UnityEngine;
-using UnityEditor;
+using UnityEngine;
+using UnityEditor.Toolbars;
+using Position = UnityEditor.Toolbars.MainToolbarDockPosition;
 
-namespace UnityToolbarExtender.TimeScaleEditor
+namespace TimeScaleEditors
 {
-    [InitializeOnLoad]
-    public class TimeScaleEditor
+    public static class TimeScaleEditor
     {
-        private const float MaxTimeScale = 10f;
-        private const float SliderPower  = 3f;
+        private const string   ElementId    = nameof(TimeScaleEditor);
+        private const Position DockPosition = Position.Middle;
+        private const float    MaxTimeScale = 10f;
 
-        private static float _timeScaleCache;
-        private static bool  _disabled;
-
-        static TimeScaleEditor()
+        [MainToolbarElement(ElementId, defaultDockPosition = DockPosition)]
+        public static MainToolbarElement CreateTimeScaleSlider()
         {
-            ToolbarExtender.RightToolbarGUI.Add(OnToolbarGUI);
-            _timeScaleCache = Time.timeScale;
-        }
+            var content     = new MainToolbarContent("Time Scale :", tooltip : "Same as Project Settings > Time > Time Scale.");
+            var sliderValue = Time.timeScale;
 
-        private static void OnToolbarGUI()
-        {
-            // NOTE:
-            // Disable UI when Time.timeScale is changed in outside.
-            _disabled = EditorApplication.isPlaying && (_timeScaleCache != Time.timeScale);
-
-            EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(250));
-            EditorGUI.BeginDisabledGroup(_disabled);
-
-            EditorGUILayout.LabelField("Time Scale", GUILayout.Width(70));
-
-            var powerSliderValue = Mathf.Pow(Time.timeScale / MaxTimeScale, 1 / SliderPower);
-            powerSliderValue = GUILayout.HorizontalSlider(powerSliderValue, 0, 1);
-
-            Time.timeScale = Mathf.Pow(powerSliderValue, SliderPower) * MaxTimeScale;
-            Time.timeScale = (float)System.Math.Round(Time.timeScale, 2);
-            Time.timeScale = EditorGUILayout.FloatField(Time.timeScale, GUILayout.Width(50));
-
-            EditorGUI.EndDisabledGroup();
-            EditorGUILayout.EndHorizontal();
-
-            if (!_disabled)
+            return new MainToolbarSlider(content, sliderValue, 0f, MaxTimeScale, (changedValue) =>
             {
-                _timeScaleCache = Time.timeScale;
-            }
+                Time.timeScale = changedValue;
+            });
         }
     }
 }
